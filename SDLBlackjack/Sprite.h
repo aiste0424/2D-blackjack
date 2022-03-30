@@ -26,11 +26,14 @@ public:
 	Vector2D GetSpriteDimension();
 	Vector2D GetImageDimension();
 
-	bool Load(const std::string& filename, Screen& screen);
+	Vector2D GetPosition(); //top left corner
+	void SetPosition(int xPos, int yPos);
+
+	bool Load(const std::string& filename);
 
 	void Unload();
 	void Update();
-	void Render(int xPos, int yPos, double angle, Screen& screen, Sprite::Flip flip = Sprite::Flip::NO_FLIP);
+	void Render(int xPos, int yPos, double angle, Sprite::Flip flip = Sprite::Flip::NO_FLIP);
 
 private:
 
@@ -45,5 +48,7 @@ private:
 	Vector2D m_celDimension;
 	Vector2D m_imageDimension;
 	Vector2D m_spriteDimension;
+
+	SDL_Rect m_targetRect;
 };
 

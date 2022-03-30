@@ -1,4 +1,5 @@
 #pragma once
+#include "Sprite.h"
 
 class Cards
 {
@@ -6,17 +7,18 @@ public:
 
 	enum class Suit
 	{
-		//the allignment is the same as in the m_deck[][] matrix. DO NOT TOUCH
+		//the allignment is the same as in the DeckOfCards.png. DO NOT TOUCH
 		Clubs,
+		Diamonds,
 		Hearts,
-		Spades,
-		Diamonds
+		Spades
 	};
 
-	//starts from 2, because card values start from 2 (easier to get the values)
+	//the allignment is the same as in the DeckOfCards.png. DO NOT TOUCH
 	enum class Rank
 	{
-		Two = 2,
+		Ace = 1,
+		Two,
 		Three,
 		Four,
 		Five,
@@ -27,8 +29,7 @@ public:
 		Ten,
 		Jack,
 		Queen,
-		King,
-		Ace
+		King
 	};
 
 	Cards();
@@ -37,6 +38,7 @@ public:
 	void SetRank(Rank rank);
 	void SetValue(int value);
 	void SetIsTaken(bool taken);
+	void SetImage(Sprite& sprite);
 
 	Suit GetSuit();
 	Rank GetRank();
@@ -49,4 +51,5 @@ private:
 	Rank m_rank;
 	int m_value;
 	bool m_isTaken;
+	Sprite m_sprite;
 };

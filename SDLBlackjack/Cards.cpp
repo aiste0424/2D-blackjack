@@ -28,6 +28,11 @@ void Cards::SetIsTaken(bool taken)
     m_isTaken = taken;
 }
 
+void Cards::SetImage(Sprite& sprite)
+{
+    m_sprite = sprite;
+}
+
 int Cards::GetValue()
 {
     return m_value;

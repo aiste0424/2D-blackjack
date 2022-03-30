@@ -1,16 +1,9 @@
 #include "Input.h"
 
-
-Input::Input()
+Input* Input::Instance()
 {
-	m_keyUp = ' ';
-	m_keyDown = ' ';
-
-	m_isMouseClicked = false;
-	m_isWindowClosed = false;
-
-	m_mouseButtonUp = 1;
-	m_mouseButtonDown = 0;
+	static Input* inputObject = new Input();
+	return inputObject;
 }
 
 void Input::Update()
@@ -55,7 +48,6 @@ void Input::Update()
 		}
 	}
 }
-
 
 char Input::GetKeyUp()
 {

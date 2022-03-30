@@ -5,6 +5,10 @@
 
 Deck::Deck()
 {
+	m_sprite.Load("Assets/Images/DeckOfCards.png");
+	m_sprite.SetSpriteDimension(148, 230); //on screen
+	m_sprite.SetImageDimension(13, 5, 1924, 1150); //original file
+	
 	//changing variable from time_t to unsigned int because of a warning "Possible loss of data"
 	srand(unsigned int(time(0)));
 
@@ -14,49 +18,35 @@ Deck::Deck()
 	m_rankCounter = 1;
 	m_rank = 0;
 	m_value = 0;
-
-	//initializing the correct card suits, ranks and values
-	for (int i = 0; i < m_maxSuit; i++)
+	for (int i = 1; i <= m_maxSuit; i++)
 	{
-		//ranks and values are reset to 2 every time a new row begins
-		m_rank = 2;
-		m_value = 2;
-		for (int j = 0; j < m_maxRank; j++)
+		for (int j = 1; j <= m_maxRank; j++)
 		{
 			m_deck[i][j].SetIsTaken(false);
 			m_deck[i][j].SetSuit(static_cast<Cards::Suit>(i));
-			m_deck[i][j].SetRank(static_cast<Cards::Rank>((m_rank)));
+			m_deck[i][j].SetRank(static_cast<Cards::Rank>((j)));
 
-			//jack, queen and king have a value of 10.
-			if ((m_value) > static_cast<int>(Cards::Rank::Ten) && (m_value) != static_cast<int>(Cards::Rank::Ace))
+			if (j > static_cast<int>(Cards::Rank::Ten))
 			{
 				m_deck[i][j].SetValue(static_cast<int>(Cards::Rank::Ten));
 			}
-			//ace default value is 11
-			else if ((m_value) == static_cast<int>(Cards::Rank::Ace))
+			else if (j == 1) //Ace default value is 11
 			{
-				m_deck[i][j].SetValue(static_cast<int>(Cards::Rank::Jack));
+				m_deck[i][j].SetValue(11);
 			}
 			//the rest of the values
 			else
 			{
-				m_deck[i][j].SetValue((m_value));
+				m_deck[i][j].SetValue((j));
 			}
-
-			//each card is repeated 6 times, because there are 6 decks being used
-			if (m_rankCounter == m_decksUsed)
-			{
-				//ranks and values are increased by one every 6 times
-				m_rankCounter = 1;
-				m_rank++;
-				m_value++;
-			}
-			else
-			{
-				m_rankCounter++;
-			}
+			std::cout << m_deck[i][j].GetValue() << std::endl;
 		}
 	}
+}
+
+Deck::~Deck()
+{
+	m_sprite.Unload();
 }
 
 void Deck::SetRandomSuit()
@@ -71,6 +61,12 @@ void Deck::SetRandomRank()
 
 void Deck::SetSprite()
 {
+	m_sprite.SetImageCel(m_randomRank, m_randomSuit);
+}
+
+void Deck::RenderSprite()
+{
+	//m_sprite.Render(0, 0, 0.0);
 }
 
 int Deck::GetValue()

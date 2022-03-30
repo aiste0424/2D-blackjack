@@ -7,7 +7,8 @@ class Screen
 
 public:
 
-	Screen();
+	static Screen* Instance();
+	
 	bool Initialize(const std::string& windowTitle = "<No name>",
 					int width = 1280,
 					int height = 720);
@@ -19,7 +20,12 @@ public:
 
 private:
 
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+	//cannot create, copy, or assign one screen to another externally
+	Screen(){}							//constructor
+	Screen(const Screen&);				//copy constructor
+	Screen& operator=(const Screen&);	//assignment operator
+
+	SDL_Window* m_window{ nullptr };
+	SDL_Renderer* m_renderer{ nullptr };
 };
 

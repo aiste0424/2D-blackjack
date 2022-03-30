@@ -1,16 +1,19 @@
 #pragma once
 #include "Cards.h"
 #include "Sprite.h"
+#include "Screen.h"
 
 class Deck
 {
 public:
 
 	Deck();
+	~Deck();
 
 	void SetRandomSuit();
 	void SetRandomRank();
 	void SetSprite();
+	void RenderSprite();
 
 	int GetValue();
 
@@ -24,10 +27,10 @@ private:
 	int m_randomRank;
 
 	const int m_maxSuit = 4;
-	const  int m_maxRank = 78;
-	const int m_decksUsed = 6;
+	const int m_maxRank = 13;
+	//const int m_decksUsed = 6;
 
-	Cards m_deck[4][78];
+	Cards m_deck[4][13];
 
 	int m_rank;
 	int m_value;

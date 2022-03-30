@@ -14,6 +14,8 @@ Sprite::Sprite()
 	m_celDimension = { 0, 0 };
 	m_imageDimension = { 0, 0 };
 	m_spriteDimension = { 0, 0 };
+
+	m_targetRect = {0, 0};
 }
 
 
@@ -64,8 +66,19 @@ Vector2D Sprite::GetImageDimension()
 {
 	return m_imageDimension;
 }
+//top left corner of a sprite
+Vector2D Sprite::GetPosition()
+{
+	return { m_targetRect.x, m_targetRect.y };
+}
 
-bool Sprite::Load(const std::string& filename, Screen& screen)
+void Sprite::SetPosition(int xPos, int yPos)
+{
+	m_targetRect.x = xPos;
+	m_targetRect.y = yPos;
+}
+
+bool Sprite::Load(const std::string& filename)
 {
 	SDL_Surface* rawImageData = IMG_Load(filename.c_str());
 
@@ -75,7 +88,7 @@ bool Sprite::Load(const std::string& filename, Screen& screen)
 		return false;
 	}
 
-	m_image = SDL_CreateTextureFromSurface(screen.GetRenderer(), rawImageData);
+	m_image = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), rawImageData);
 
 	return true;
 }
@@ -104,25 +117,24 @@ void Sprite::Update()
 	}
 }
 
-void Sprite::Render(int xPos, int yPos, double angle, Screen& screen, Sprite::Flip flip)
+void Sprite::Render(int xPos, int yPos, double angle, Sprite::Flip flip)
 {
+	SDL_Rect sourceRect;
+
 	if (!m_isAnimationDead)
 	{
-		SDL_Rect sourceRect;
-		SDL_Rect targetRect;
-
 		sourceRect.x = (m_imageCel % m_imageDimension.x) * m_celDimension.x;
 		sourceRect.y = (m_imageCel / m_imageDimension.x) * m_celDimension.y;
 		sourceRect.w = m_celDimension.x;
 		sourceRect.h = m_celDimension.y;
 
-		targetRect.x = xPos;
-		targetRect.y = yPos;
-		targetRect.w = m_spriteDimension.x;
-		targetRect.h = m_spriteDimension.y;
+		m_targetRect.x = xPos;
+		m_targetRect.y = yPos;
+		m_targetRect.w = m_spriteDimension.x;
+		m_targetRect.h = m_spriteDimension.y;
 
-		SDL_Point centre{ m_spriteDimension.x, m_spriteDimension.y };
+		SDL_Point centre{ m_spriteDimension.x / 2, m_spriteDimension.y / 2 };
 
-		SDL_RenderCopyEx(screen.GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, static_cast<SDL_RendererFlip>(flip));
+		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), m_image, &sourceRect, &m_targetRect, angle, &centre, static_cast<SDL_RendererFlip>(flip));
 	}
 }

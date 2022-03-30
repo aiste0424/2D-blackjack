@@ -1,10 +1,11 @@
 #include "Screen.h"
 #include <iostream>
 
-Screen::Screen()
+//creates screenObject once
+Screen* Screen::Instance()
 {
-	m_window = nullptr;
-	m_renderer = nullptr;
+	static Screen* screenObject = new Screen();
+	return screenObject;
 }
 
 bool Screen::Initialize(const std::string& windowTitle, int width, int height)

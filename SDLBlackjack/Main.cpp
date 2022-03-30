@@ -1,43 +1,17 @@
-#include <SDL.h>
-#include "Screen.h"
-#include "Input.h"
-#include "Sprite.h"
-
+#include <memory>
+#include "Game.h"
+#include "MainMenuState.h"
 
 int main(int argc, char* argv[])
 {
-	bool isGameRunning = true;
-	Screen screen;
-	Sprite cards;
-	Input input;
-	
-	
-	if (!screen.Initialize("Chibi Rascal"))
-	{
-		return 0;
-	}
-	cards.Load("Assets/Images/DeckOfCards.png", screen);
-	cards.SetSpriteDimension(148, 230);
-	cards.SetImageDimension(13, 5, 1924, 1150);
-	cards.IsAnimated(false);
 
-	while (isGameRunning)
+	std::unique_ptr<Game> game = std::make_unique<Game>(new MainMenuState);
+
+	if (game->Initialize())
 	{
-		if (input.IsWindowClosed())
-		{
-			isGameRunning = false;
-		}
-		if (input.GetKeyDown() == SDLK_ESCAPE)
-		{
-			isGameRunning = false;
-		}
-		
-		screen.Clear();
-		cards.Render(0, 0, 0.0, screen);
-		input.Update();
-		screen.Present();
+		game->Run();
+		game->Shutdown();
 	}
-	cards.Unload();
-	screen.Shutdown();
+
 	return 0;
 }

@@ -7,7 +7,7 @@ class Input
 
 public:
 
-	Input();
+	static Input* Instance();
 	void Update();
 
 	char GetKeyUp();
@@ -19,14 +19,18 @@ public:
 
 private:
 
-	char m_keyUp;
-	char m_keyDown;
+	Input(){}
+	Input(const Input&);
+	Input& operator=(Input&);
 
-	bool m_isMouseClicked;
-	bool m_isWindowClosed;
+	char m_keyUp{ ' ' };
+	char m_keyDown{ ' ' };
 
-	int m_mouseButtonUp;
-	int m_mouseButtonDown;
+	bool m_isMouseClicked{ false };
+	bool m_isWindowClosed{ false };
+
+	int m_mouseButtonUp{ 1 };
+	int m_mouseButtonDown{ 0 };
 
 	Vector2D m_mousePosition;
 };
