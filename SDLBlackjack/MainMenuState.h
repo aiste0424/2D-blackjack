@@ -1,8 +1,8 @@
 #pragma once
-#include "Input.h"
 #include "Sprite.h"
 #include "GameState.h"
 #include "Button.h"
+#include "Vector2D.h"
 
 class MainMenuState : public GameState
 {
@@ -16,7 +16,6 @@ public:
 private:
 
 	Sprite m_backgroundSprite;
-	Button m_startButton;
-	Button m_rulesButton;
+	Button m_startButton, m_rulesButton;
 };
 

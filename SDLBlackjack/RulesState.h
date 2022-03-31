@@ -8,6 +8,19 @@
 class RulesState : public GameState
 {
 public:
+
+	enum class RulePages
+	{
+		Rules,
+		Payouts
+	};
+
+	enum class FacingDirection
+	{
+		Default = 0,
+		Left = 90,
+		Right = -90
+	};
 	
 	virtual bool OnEnter();						//Load assets in this function
 	virtual GameState* Update();				//Here we update all of our game mechanics
@@ -16,10 +29,9 @@ public:
 
 private:
 	
-	Sprite m_rulesImage;
-	Sprite m_payoutsImage;
-	Button m_arrowBack;
-	Button m_arrowLeftRight;
-	bool m_isRulesSelected = false;
+	Sprite m_rulesImage, m_payoutsImage;
+	Button m_arrowBack, m_arrowLeftRight;
+	RulePages m_rulePages = {RulePages::Rules};
+	FacingDirection m_facingDirection = { FacingDirection::Left };
 };
 

@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Sprite.h"
 #include "Deck.h"
+#include "Button.h"
 
 class PlayState : public GameState
 {
@@ -16,5 +17,6 @@ private:
 
 	Sprite m_backgroundImage;
 	Deck m_deck;
+	Button m_buttonGetCard;
 };
 

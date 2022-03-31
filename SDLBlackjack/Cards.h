@@ -8,17 +8,16 @@ public:
 	enum class Suit
 	{
 		//the allignment is the same as in the DeckOfCards.png. DO NOT TOUCH
+		Hearts,
 		Clubs,
 		Diamonds,
-		Hearts,
 		Spades
 	};
 
 	//the allignment is the same as in the DeckOfCards.png. DO NOT TOUCH
 	enum class Rank
 	{
-		Ace = 1,
-		Two,
+		Two = 2,
 		Three,
 		Four,
 		Five,
@@ -29,7 +28,8 @@ public:
 		Ten,
 		Jack,
 		Queen,
-		King
+		King,
+		Ace
 	};
 
 	Cards();

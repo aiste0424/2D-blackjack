@@ -2,8 +2,9 @@
 #include "Cards.h"
 #include "Sprite.h"
 #include "Screen.h"
+#include "GameObject.h"
 
-class Deck
+class Deck : public GameObject
 {
 public:
 
@@ -12,13 +13,15 @@ public:
 
 	void SetRandomSuit();
 	void SetRandomRank();
-	void SetSprite();
-	void RenderSprite();
+	void SetCardImage();
 
 	int GetValue();
 
-	void CardTaken(); //checks if a card was taken, if yes, sets it to 'taken'
+	bool CardTaken(); //checks if a card was taken, if yes, sets it to 'taken'
 	void ResetCards(); //resets 'taken' to false for replayability purposes
+
+	virtual bool Update() override;
+	virtual bool Render() override;
 
 private:
 
@@ -36,5 +39,5 @@ private:
 	int m_value;
 	int m_rankCounter;
 
-	Sprite m_sprite;
+	Sprite m_cardSprite;
 };

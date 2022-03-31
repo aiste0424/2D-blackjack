@@ -5,9 +5,9 @@
 
 Deck::Deck()
 {
-	m_sprite.Load("Assets/Images/DeckOfCards.png");
-	m_sprite.SetSpriteDimension(148, 230); //on screen
-	m_sprite.SetImageDimension(13, 5, 1924, 1150); //original file
+	m_cardSprite.Load("Assets/Images/MainGame/DeckOfCardsPixel.png");
+	m_cardSprite.SetSpriteDimension({ 128, 170 }); //on screen
+	m_cardSprite.SetImageDimension(15, 4, { 1920, 680 }); //original file
 	
 	//changing variable from time_t to unsigned int because of a warning "Possible loss of data"
 	srand(unsigned int(time(0)));
@@ -18,35 +18,36 @@ Deck::Deck()
 	m_rankCounter = 1;
 	m_rank = 0;
 	m_value = 0;
-	for (int i = 1; i <= m_maxSuit; i++)
+	for (int i = 0; i < m_maxSuit; i++)
 	{
-		for (int j = 1; j <= m_maxRank; j++)
+		for (int j = 0; j < m_maxRank; j++)
 		{
 			m_deck[i][j].SetIsTaken(false);
 			m_deck[i][j].SetSuit(static_cast<Cards::Suit>(i));
-			m_deck[i][j].SetRank(static_cast<Cards::Rank>((j)));
+			m_deck[i][j].SetRank(static_cast<Cards::Rank>(j + 2));
 
-			if (j > static_cast<int>(Cards::Rank::Ten))
+			//(j+2) instead of j, because Rank enums start from 2 and the loops & matrices start from 0.
+			if ((j + 2) > static_cast<int>(Cards::Rank::Ten) && (j + 2) != static_cast<int>(Cards::Rank::Ace))
 			{
 				m_deck[i][j].SetValue(static_cast<int>(Cards::Rank::Ten));
 			}
-			else if (j == 1) //Ace default value is 11
+			//ace default value is 11
+			else if ((j + 2) == static_cast<int>(Cards::Rank::Ace))
 			{
-				m_deck[i][j].SetValue(11);
+				m_deck[i][j].SetValue(static_cast<int>(Cards::Rank::Jack));
 			}
-			//the rest of the values
+			//the rest values
 			else
 			{
-				m_deck[i][j].SetValue((j));
+				m_deck[i][j].SetValue((j + 2));
 			}
-			std::cout << m_deck[i][j].GetValue() << std::endl;
 		}
 	}
 }
 
 Deck::~Deck()
 {
-	m_sprite.Unload();
+	m_cardSprite.Unload();
 }
 
 void Deck::SetRandomSuit()
@@ -56,17 +57,12 @@ void Deck::SetRandomSuit()
 
 void Deck::SetRandomRank()
 {
-	m_randomRank = rand() % m_maxRank;
+	m_randomRank = rand() % m_maxRank + 2;
 }
 
-void Deck::SetSprite()
+void Deck::SetCardImage()
 {
-	m_sprite.SetImageCel(m_randomRank, m_randomSuit);
-}
-
-void Deck::RenderSprite()
-{
-	//m_sprite.Render(0, 0, 0.0);
+	m_cardSprite.SetImageCel(m_randomRank, m_randomSuit);
 }
 
 int Deck::GetValue()
@@ -86,7 +82,22 @@ void Deck::ResetCards()
 	}
 }
 
-void Deck::CardTaken()
+bool Deck::Update()
+{
+	SetRandomSuit();
+	SetRandomRank();
+	CardTaken();
+	SetCardImage();
+	return true;
+}
+
+bool Deck::Render()
+{
+	m_cardSprite.Render(0, 0, 0.0);
+	return true;
+}
+
+bool Deck::CardTaken()
 {
 	//while the card is taken, give another card
 	while (m_deck[m_randomSuit][m_randomRank].GetIsTaken() == true)
@@ -96,4 +107,5 @@ void Deck::CardTaken()
 	}
 	//if the card is picked, set to 'taken'
 	m_deck[m_randomSuit][m_randomRank].SetIsTaken(true);
+	return true;
 }

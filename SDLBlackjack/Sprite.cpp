@@ -41,10 +41,9 @@ void Sprite::SetAnimationVelocity(float velocity)
 }
 
 //This is the resolution of the sprite image as it will appear on-screen
-void Sprite::SetSpriteDimension(int width, int height)
+void Sprite::SetSpriteDimension(Vector2D dimensions)
 {
-	m_spriteDimension.x = width;
-	m_spriteDimension.y = height;
+	m_spriteDimension = dimensions;
 }
 
 Vector2D Sprite::GetSpriteDimension()
@@ -53,29 +52,18 @@ Vector2D Sprite::GetSpriteDimension()
 }
 
 //This is the resolution and col/row dimensions of the sprite image as it is stored in the Assets folder
-void Sprite::SetImageDimension(int columns, int rows, int width, int height)
+void Sprite::SetImageDimension(int columns, int rows, Vector2D dimensions)
 {
 	m_imageDimension.x = columns;
 	m_imageDimension.y = rows;
 
-	m_celDimension.x = width / columns;
-	m_celDimension.y = height / rows;
+	m_celDimension.x = dimensions.x / columns;
+	m_celDimension.y = dimensions.y / rows;
 }
 
 Vector2D Sprite::GetImageDimension()
 {
 	return m_imageDimension;
-}
-//top left corner of a sprite
-Vector2D Sprite::GetPosition()
-{
-	return { m_targetRect.x, m_targetRect.y };
-}
-
-void Sprite::SetPosition(int xPos, int yPos)
-{
-	m_targetRect.x = xPos;
-	m_targetRect.y = yPos;
 }
 
 bool Sprite::Load(const std::string& filename)

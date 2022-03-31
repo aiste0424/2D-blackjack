@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include "Vector2D.h"
 
 class GameObject
@@ -11,16 +10,19 @@ public:
 	virtual ~GameObject() = 0 {}
 	const Vector2D& GetPosition() const;
 	const Vector2D& GetDimension() const;
+	const double GetAngle() const;
 
 	void SetPosition(Vector2D position);
 	void SetDimension(Vector2D dimension);
+	void SetAngle(double angle);
 
-	virtual bool Update() { return true; };
-	virtual bool Render() { return true; };
+	virtual bool Update() = 0;
+	virtual bool Render() = 0;
 
 protected:
 
 	Vector2D m_position;
 	Vector2D m_dimension;
+	double m_angle = 0.0;
 };
 

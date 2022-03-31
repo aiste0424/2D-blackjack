@@ -20,14 +20,11 @@ public:
 	void IsAnimationLooping(bool flag);
 	void SetAnimationVelocity(float velocity);
 	void SetImageCel(int column, int row);
-	void SetSpriteDimension(int width, int height);
-	void SetImageDimension(int columns, int rows, int width, int height);
+	void SetSpriteDimension(Vector2D dimensions);
+	void SetImageDimension(int columns, int rows, Vector2D dimensions);
 
 	Vector2D GetSpriteDimension();
 	Vector2D GetImageDimension();
-
-	Vector2D GetPosition(); //top left corner
-	void SetPosition(int xPos, int yPos);
 
 	bool Load(const std::string& filename);
 

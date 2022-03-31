@@ -1,26 +1,31 @@
 #include "Button.h"
-#include <iostream>
+#include "Input.h"
 
-void Button::SetNormalAttributes(const std::string& filename, Vector2D dimensions, Vector2D position)
+//default state sprite attributes
+void Button::SetNormalAttributes(const std::string& filename, const Vector2D& imageDimensions,
+                                 const Vector2D& spriteDimensions, const Vector2D& columnsRows)
 {
     m_normalSprite.Load(filename);
-    m_normalSprite.SetImageDimension(1, 1, dimensions.x, dimensions.y);
-    m_normalSprite.SetPosition(position.x, position.y);
+    m_normalSprite.SetImageDimension(columnsRows.x, columnsRows.y, imageDimensions);
+    m_normalSprite.SetSpriteDimension(spriteDimensions);
 }
 
-void Button::SetHoveredAttributes(const std::string& filename, Vector2D dimensions, Vector2D position)
+//hovered state sprite attributes
+void Button::SetHoveredAttributes(const std::string& filename, const Vector2D& imageDimensions,
+                                  const Vector2D& spriteDimensions, const Vector2D& columnsRows)
 {
     m_hoveredSprite.Load(filename);
-    m_hoveredSprite.SetImageDimension(1, 1, dimensions.x, dimensions.y);
-    m_hoveredSprite.SetPosition(position.x, position.y);
+    m_hoveredSprite.SetImageDimension(columnsRows.x, columnsRows.y, imageDimensions);
+    m_hoveredSprite.SetSpriteDimension(spriteDimensions);
 }
 
+//bounding box (same size as the image) for collision
 void Button::SetButtonRect()
 {
-    m_buttonRect.x = m_normalSprite.GetPosition().x;
-    m_buttonRect.y = m_normalSprite.GetPosition().y;
-    m_buttonRect.w = m_normalSprite.GetSpriteDimension().x;
-    m_buttonRect.h = m_normalSprite.GetSpriteDimension().y;
+    m_buttonRect.x = this->GetPosition().x;
+    m_buttonRect.y = this->GetPosition().y;
+    m_buttonRect.w = this->GetDimension().x;
+    m_buttonRect.h = this->GetDimension().y;
 }
 
 SDL_Point Button::GetMousePosition()
@@ -29,13 +34,15 @@ SDL_Point Button::GetMousePosition()
     return m_mousePosition;
 }
 
+//mainly updates button states for the Render() function
 bool Button::Update()
 {
     GetMousePosition();
-    m_buttonState = Button::ButtonState::Default;
-
+    
+    //if mouse in inside the bounding box
     if (static_cast<bool>(SDL_PointInRect(&m_mousePosition, &m_buttonRect)))
     {
+        //if mouse is clicked
         if (Input::Instance()->IsMouseClicked())
         {
             m_buttonState = Button::ButtonState::Clicked;
@@ -43,19 +50,24 @@ bool Button::Update()
         }
         m_buttonState = Button::ButtonState::Hovered;
     }
-    
+    else
+    {
+        m_buttonState = Button::ButtonState::Default;
+    }
+
+    //if nothing happens to the button
     return false;
 }
 
-bool Button::Render(FacingDirection facingDirection)
+bool Button::Render()
 {
     if (m_buttonState == Button::ButtonState::Hovered)
     {
-        m_hoveredSprite.Render(m_hoveredSprite.GetPosition().x, m_hoveredSprite.GetPosition().y, static_cast<double>(facingDirection));
+        m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, GetAngle());
     }
     else
     {
-        m_normalSprite.Render(m_normalSprite.GetPosition().x, m_normalSprite.GetPosition().y, static_cast<double>(facingDirection));
+        m_normalSprite.Render(this->GetPosition().x, this->GetPosition().y, GetAngle());
     }
     return true;
 }
