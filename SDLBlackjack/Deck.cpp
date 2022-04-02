@@ -93,7 +93,7 @@ bool Deck::Update()
 
 bool Deck::Render()
 {
-	m_cardSprite.Render(0, 0, 0.0);
+	m_cardSprite.Render(0, 0);
 	return true;
 }
 

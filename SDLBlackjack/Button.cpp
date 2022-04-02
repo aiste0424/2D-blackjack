@@ -63,11 +63,11 @@ bool Button::Render()
 {
     if (m_buttonState == Button::ButtonState::Hovered)
     {
-        m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, GetAngle());
+        m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle());
     }
     else
     {
-        m_normalSprite.Render(this->GetPosition().x, this->GetPosition().y, GetAngle());
+        m_normalSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle());
     }
     return true;
 }

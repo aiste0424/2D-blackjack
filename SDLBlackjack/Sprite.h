@@ -12,6 +12,7 @@ public:
 	{
 		NO_FLIP = SDL_FLIP_NONE,
 		HORZ_FLIP = SDL_FLIP_HORIZONTAL,
+		VERT_FLIP = SDL_FLIP_VERTICAL
 	};
 
 	Sprite();
@@ -30,7 +31,7 @@ public:
 
 	void Unload();
 	void Update();
-	void Render(int xPos, int yPos, double angle, Sprite::Flip flip = Sprite::Flip::NO_FLIP);
+	void Render(int xPos, int yPos, double angle = 0.0, Sprite::Flip flip = Sprite::Flip::NO_FLIP);
 
 private:
 

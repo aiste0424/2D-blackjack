@@ -14,13 +14,6 @@ public:
 		Rules,
 		Payouts
 	};
-
-	enum class FacingDirection
-	{
-		Default = 0,
-		Left = 90,
-		Right = -90
-	};
 	
 	virtual bool OnEnter();						//Load assets in this function
 	virtual GameState* Update();				//Here we update all of our game mechanics
@@ -30,8 +23,7 @@ public:
 private:
 	
 	Sprite m_rulesImage, m_payoutsImage;
-	Button m_arrowBack, m_arrowLeftRight;
+	Button m_closeButton, m_arrowLeft, m_arrowRight;
 	RulePages m_rulePages = {RulePages::Rules};
-	FacingDirection m_facingDirection = { FacingDirection::Left };
 };
 
