@@ -7,11 +7,10 @@ Game::Game(GameState* initialState)
 	m_gameState.reset(initialState);
 }
 
-bool Game::Initialize()
+bool Game::Initialize(const std::string& windowTitle)
 {
-	Screen::Instance()->Initialize("Blackjack");
+	Screen::Instance()->Initialize(windowTitle);
 
-	//Init screen 
 	//Init music system
 	//Init Font system
 	//Init third-party libraries

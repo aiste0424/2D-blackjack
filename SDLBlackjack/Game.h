@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <string>
 #include "GameState.h"
 
 class Game
@@ -8,7 +9,7 @@ class Game
 public:
 
 	Game(GameState* initialState);
-	bool Initialize();
+	bool Initialize(const std::string& windowTitle);
 	bool Run();
 	void Shutdown();
 

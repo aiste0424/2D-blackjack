@@ -4,7 +4,7 @@
 
 bool MainMenuState::OnEnter()
 {
-	auto InitializingBackgroundImages = [](Sprite& sprite, std::string filename, Vector2D spriteSize, Vector2D imageSize)
+	auto InitializingBackgroundImages = [](Sprite& sprite, const std::string& filename, const Vector2D& spriteSize, const Vector2D& imageSize)
 	{
 		sprite.Load(filename);
 		sprite.SetSpriteDimension(spriteSize);

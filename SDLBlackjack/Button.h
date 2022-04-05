@@ -28,6 +28,8 @@ public:
 
 private:
 
+	bool m_isFlipped = false;
+
 	Sprite m_normalSprite;
 	Sprite m_hoveredSprite;
 	SDL_Rect m_buttonRect = {0, 0, 0, 0};

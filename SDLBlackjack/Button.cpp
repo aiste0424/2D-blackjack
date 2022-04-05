@@ -63,7 +63,14 @@ bool Button::Render()
 {
     if (m_buttonState == Button::ButtonState::Hovered)
     {
-        m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle());
+		auto flip = Sprite::Flip::NO_FLIP;
+		
+		if (m_isFlipped)
+		{
+			flip = Sprite::Flip::HORZ_FLIP;
+		}
+		
+		m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle(), flip);
     }
     else
     {

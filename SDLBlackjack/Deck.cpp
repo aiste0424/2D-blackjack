@@ -5,9 +5,9 @@
 
 Deck::Deck()
 {
-	m_cardSprite.Load("Assets/Images/MainGame/DeckOfCardsPixel.png");
+	m_cardSprite.Load("Assets/Images/MainGame/DeckOfCardsPixel2.png");
 	m_cardSprite.SetSpriteDimension({ 128, 170 }); //on screen
-	m_cardSprite.SetImageDimension(15, 4, { 1920, 680 }); //original file
+	m_cardSprite.SetImageDimension(13, 4, { 1643, 679 }); //original file
 	
 	//changing variable from time_t to unsigned int because of a warning "Possible loss of data"
 	srand(unsigned int(time(0)));

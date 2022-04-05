@@ -13,8 +13,8 @@ public:
 	const Vector2D& GetDimension() const;
 	const double GetAngle() const;
 
-	void SetPosition(Vector2D position);
-	void SetDimension(Vector2D dimension);
+	void SetPosition(const Vector2D& position);
+	void SetDimension(const Vector2D& dimension);
 	void SetAngle(double angle = 0.0);
 
 	virtual bool Update() = 0;

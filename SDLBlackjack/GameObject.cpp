@@ -15,12 +15,12 @@ const double GameObject::GetAngle() const
 	return m_angle;
 }
 
-void GameObject::SetPosition(Vector2D position)
+void GameObject::SetPosition(const Vector2D& position)
 {
 	m_position = position;
 }
 
-void GameObject::SetDimension(Vector2D dimension)
+void GameObject::SetDimension(const Vector2D& dimension)
 {
 	m_dimension = dimension;
 }
