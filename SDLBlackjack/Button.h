@@ -15,6 +15,7 @@ public:
 
 	void SetButtonRect();
 	SDL_Point GetMousePosition();
+	void SetIsFlipped(bool isFlipped);
 
 	void SetNormalAttributes(const std::string& filename, const Vector2D& imageDimensions,
 							 const Vector2D& spriteDimensions, const Vector2D& columnsRows);
@@ -24,11 +25,11 @@ public:
 	virtual bool Update() override;
 	virtual bool Render() override;
 	
-	void Shutdown();
+	void Unload();
 
 private:
 
-	bool m_isFlipped = false;
+	bool m_isFlipped = { false };
 
 	Sprite m_normalSprite;
 	Sprite m_hoveredSprite;
@@ -36,4 +37,3 @@ private:
 	SDL_Point m_mousePosition = { 0, 0 };
 	ButtonState m_buttonState = { ButtonState::Default };
 };
-

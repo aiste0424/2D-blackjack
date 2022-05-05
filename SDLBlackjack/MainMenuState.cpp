@@ -4,7 +4,8 @@
 
 bool MainMenuState::OnEnter()
 {
-	auto InitializingBackgroundImages = [](Sprite& sprite, const std::string& filename, const Vector2D& spriteSize, const Vector2D& imageSize)
+	auto InitializingBackgroundImages = [](Sprite& sprite, const std::string& filename,
+										   const Vector2D& spriteSize, const Vector2D& imageSize)
 	{
 		sprite.Load(filename);
 		sprite.SetSpriteDimension(spriteSize);
@@ -106,9 +107,9 @@ void MainMenuState::OnExit()
 {
 	m_mainMenuBackground.Unload();
 	m_exitBackground.Unload();
-	m_startButton.Shutdown();
-	m_rulesButton.Shutdown();
-	m_exitButton.Shutdown();
-	m_yes.Shutdown();
-	m_no.Shutdown();
+	m_startButton.Unload();
+	m_rulesButton.Unload();
+	m_exitButton.Unload();
+	m_yes.Unload();
+	m_no.Unload();
 }

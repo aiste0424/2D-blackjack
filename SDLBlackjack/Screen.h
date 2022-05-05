@@ -9,9 +9,7 @@ public:
 
 	static Screen* Instance();
 	
-	bool Initialize(const std::string& windowTitle = "<No name>",
-					int width = 1280,
-					int height = 720);
+	bool Initialize(const std::string& windowTitle, int width, int height);
 	void Clear();
 	void Present();
 	void Shutdown();
@@ -27,5 +25,6 @@ private:
 
 	SDL_Window* m_window{ nullptr };
 	SDL_Renderer* m_renderer{ nullptr };
+	SDL_Rect* m_screenSize{ nullptr };
 };
 

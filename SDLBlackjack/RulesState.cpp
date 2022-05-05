@@ -3,7 +3,8 @@
 #include "Vector2D.h"
 bool RulesState::OnEnter()
 {
-	auto InitializingBackgroundImages = [](Sprite& sprite, std::string filename, Vector2D spriteSize, Vector2D imageSize)
+	auto InitializingBackgroundImages = [](Sprite& sprite, const std::string& filename,
+										   const Vector2D& spriteSize, const Vector2D& imageSize)
 	{
 		sprite.Load(filename);
 		sprite.SetSpriteDimension(spriteSize);
@@ -27,12 +28,10 @@ bool RulesState::OnEnter()
 		"Assets/Images/UI/CloseButtonHovered.png", { 700, 700 }, { 100, 100 }, { 1180, 0 }, {1, 1});
 
 	//button with the same sprite as the start button
-	InitializingButtons(m_arrowRight, "Assets/Images/MainMenu/StartNormal.png",
+	InitializingButtons(m_arrowsButton, "Assets/Images/MainMenu/StartNormal.png",
 		"Assets/Images/MainMenu/StartHovered.png", { 700, 700 }, { 100, 100 }, { 1180, 620 }, {1, 1});
 
-	InitializingButtons(m_arrowLeft, "Assets/Images/Rules/ArrowLeftNormal.png",
-		"Assets/Images/Rules/ArrowLeftHovered.png", { 700, 700 }, { 100, 100 }, { 0, 620 }, { 1, 1 });
-
+	//{0, 620}
 	return true;
 }
 
@@ -44,13 +43,19 @@ GameState* RulesState::Update()
 		return new MainMenuState;
 	}
 	//if rules are open and the button is pressed
-	else if (m_arrowRight.Update() && m_rulePages == RulePages::Rules)
+	else if (m_arrowsButton.Update() && m_rulePages == RulePages::Rules)
 	{
 		m_rulePages = RulePages::Payouts;
+		m_arrowsButton.SetPosition({ 0, 620 });
+		m_arrowsButton.SetButtonRect();
+		m_arrowsButton.SetIsFlipped(true);
 	}
-	else if (m_arrowLeft.Update() && m_rulePages == RulePages::Payouts)
+	else if (m_arrowsButton.Update() && m_rulePages == RulePages::Payouts)
 	{
 		m_rulePages = RulePages::Rules;
+		m_arrowsButton.SetPosition({ 1180, 620 });
+		m_arrowsButton.SetButtonRect();
+		m_arrowsButton.SetIsFlipped(false);
 	}
 
 	return this;
@@ -61,14 +66,14 @@ bool RulesState::Render()
 	if (m_rulePages == RulePages::Rules)
 	{
 		m_rulesImage.Render(0, 0);
-		m_arrowRight.Render();
 	}
 	else if (m_rulePages == RulePages::Payouts)
 	{
 		m_payoutsImage.Render(0, 0);
-		m_arrowLeft.Render();
+		
 	}
 
+	m_arrowsButton.Render();
 	m_closeButton.Render();
 
 	return true;
@@ -78,7 +83,6 @@ void RulesState::OnExit()
 {
 	m_rulesImage.Unload();
 	m_payoutsImage.Unload();
-	m_closeButton.Shutdown();
-	m_arrowLeft.Shutdown();
-	m_arrowRight.Shutdown();
+	m_closeButton.Unload();
+	m_arrowsButton.Unload();
 }

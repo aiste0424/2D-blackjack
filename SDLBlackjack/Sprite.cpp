@@ -73,6 +73,7 @@ bool Sprite::Load(const std::string& filename)
 	if (!rawImageData)
 	{
 		std::cout << "Error loading image file." << std::endl;
+		std::cout << filename;
 		return false;
 	}
 

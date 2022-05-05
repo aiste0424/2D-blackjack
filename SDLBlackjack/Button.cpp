@@ -34,6 +34,11 @@ SDL_Point Button::GetMousePosition()
     return m_mousePosition;
 }
 
+void Button::SetIsFlipped(bool isFlipped)
+{
+    m_isFlipped = isFlipped;
+}
+
 //mainly updates button states for the Render() function
 bool Button::Update()
 {
@@ -61,25 +66,25 @@ bool Button::Update()
 
 bool Button::Render()
 {
+    auto flip = Sprite::Flip::NO_FLIP;
+
+    if (m_isFlipped)
+    {
+        flip = Sprite::Flip::HORZ_FLIP;
+    }
+
     if (m_buttonState == Button::ButtonState::Hovered)
     {
-		auto flip = Sprite::Flip::NO_FLIP;
-		
-		if (m_isFlipped)
-		{
-			flip = Sprite::Flip::HORZ_FLIP;
-		}
-		
 		m_hoveredSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle(), flip);
     }
     else
     {
-        m_normalSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle());
+        m_normalSprite.Render(this->GetPosition().x, this->GetPosition().y, this->GetAngle(), flip);
     }
     return true;
 }
 
-void Button::Shutdown()
+void Button::Unload()
 {
     m_hoveredSprite.Unload();
     m_normalSprite.Unload();

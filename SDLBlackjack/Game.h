@@ -9,7 +9,7 @@ class Game
 public:
 
 	Game(GameState* initialState);
-	bool Initialize(const std::string& windowTitle);
+	bool Initialize(const std::string& windowTitle, int width, int height);
 	bool Run();
 	void Shutdown();
 

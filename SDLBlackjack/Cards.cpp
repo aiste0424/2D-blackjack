@@ -1,19 +1,11 @@
 #include "Cards.h"
 
-Cards::Cards()
-{
-    m_value = 0;
-    m_isTaken = false;
-    m_suit = static_cast<Suit>(0);
-    m_rank = static_cast<Rank>(0);
-}
-
-void Cards::SetSuit(Suit suit)
+void Cards::SetSuit(Suit& suit)
 {
     m_suit = suit;
 }
 
-void Cards::SetRank(Rank rank)
+void Cards::SetRank(Rank& rank)
 {
     m_rank = rank;
 }
@@ -38,12 +30,12 @@ int Cards::GetValue()
     return m_value;
 }
 
-Cards::Suit Cards::GetSuit()
+const Cards::Suit& Cards::GetSuit() const
 {
     return m_suit;
 }
 
-Cards::Rank Cards::GetRank()
+const Cards::Rank& Cards::GetRank() const
 {
     return m_rank;
 }
@@ -51,4 +43,25 @@ Cards::Rank Cards::GetRank()
 bool Cards::GetIsTaken()
 {
     return m_isTaken;
+}
+
+const Sprite& Cards::GetImage() const
+{
+    return m_sprite;
+}
+
+bool Cards::Update()
+{
+    return true;
+}
+
+void Cards::SetCardMovementState(CardMovementState& m_state)
+{
+
+}
+
+bool Cards::Render()
+{
+    m_sprite.Render(m_position.x, m_position.y);
+    return true;
 }

@@ -7,9 +7,9 @@ Game::Game(GameState* initialState)
 	m_gameState.reset(initialState);
 }
 
-bool Game::Initialize(const std::string& windowTitle)
+bool Game::Initialize(const std::string& windowTitle, int width, int height)
 {
-	Screen::Instance()->Initialize(windowTitle);
+	Screen::Instance()->Initialize(windowTitle, width, height);
 
 	//Init music system
 	//Init Font system
@@ -31,8 +31,9 @@ bool Game::Run()
 		//updating the current game state
 
 		//current game state will return a pointer to a different state if a switch is required 
-		//If no switch is required then the current states pointer is returned
+		//If no switch is required then the current state's pointer is returned
 		GameState* nextState = m_gameState->Update();
+		
 
 		m_gameState->Render();
 		Screen::Instance()->Present();
@@ -48,8 +49,11 @@ bool Game::Run()
 				m_gameState->OnEnter();
 			}
 		}
-
-		//rendering the screen
+		if (Input::Instance()->GetKeyDown() == SDLK_ESCAPE || Input::Instance()->IsWindowClosed())
+		{
+			m_gameState->OnExit();
+			m_gameState = nullptr;
+		}
 	}
 	return true;
 }

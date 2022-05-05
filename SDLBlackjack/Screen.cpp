@@ -22,7 +22,9 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 		SDL_WINDOWPOS_CENTERED,    //pos y
 		width,                     //width
 		height,                    //height
-		0);                        //flags
+		0);      
+	
+	//SDL_GetWindowSize(m_window, );//flags
 
 	if (!m_window)
 	{
@@ -32,6 +34,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
+	
 	if (!m_renderer)
 	{
 		std::cout << "Error creating renderer." << std::endl;
