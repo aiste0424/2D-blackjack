@@ -1,8 +1,8 @@
 #pragma once
-#include "Deck.h"
-#include "Cards.h"
+#include "GameObject.h"
+#include "Text.h"
 
-class Score
+class Score : public GameObject
 {
 public:
 
@@ -10,13 +10,17 @@ public:
 
 	int GetScore();
 	void SetScore(int score);
-	void PrintScore();
 	void UpdateScore();
 
 	void SetCardValue(int value);
 
+	virtual bool Update() override { return false; };
+	virtual bool Render() override;
+	void Unload();
+	void SetScoreTextDimension();
 private:
 
 	int m_cardValue;
 	int m_score;
+	Text m_text;
 };

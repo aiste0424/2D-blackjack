@@ -1,22 +1,21 @@
 #pragma once
 #include "Score.h"
 #include "GameObject.h"
-#include "Deck.h"
+#include "Vector2D.h"
 #include <vector>
+#include "Cards.h"
 
 class Player : public GameObject
 {
 public:
 
-	//Aiste's enum class and 2 functions
 	enum class Choice
 	{
 		No,
 		Yes
 	};
 
-	void DrawCard();
-	int GetScore();   //for the outcomes
+	void Initialize();
 	void AddCard(const Cards& card);
 
 	Choice GetChoice();  
@@ -28,9 +27,11 @@ public:
 private:
 
 	Choice m_choice;
-	Score m_score;
+	Score* m_score = new Score;
 	std::vector<Cards> m_cards;
-	int m_positionIncrementX   = 150;
-	//Render buttons in the player class?
-};
+	Vector2D m_finalDestination = { 321, 510 };
+	std::vector<Vector2D> m_cardPositions;
 
+	bool m_isReadyToMove = false;
+	bool m_isCardInPlace = true;
+};

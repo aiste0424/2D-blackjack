@@ -5,6 +5,7 @@
 #include "Button.h"
 #include <stack>
 #include "Player.h"
+#include "Text.h"
 
 class Table : public GameObject
 {
@@ -13,6 +14,8 @@ public:
 	enum class TableStates
 	{
 		TheDeal,
+		ShowButtons,
+		HideButtons,
 		CardAccepted,
 		CardDeclined,
 		IsBlackjack,
@@ -28,10 +31,17 @@ public:
 	};
 
 	void Initialize();
+	const TableStates& GetTableStates() const;
+	void SetTableStates(TableStates& tableState);
 	void TheDeal();
+	bool IsDouble();
 	void Unload();
 	virtual bool Render() override;
 	virtual bool Update() override;
+
+	void SetButtonPressed(bool buttonPressed);
+	void SetText();
+	void GiveCardToPlayer();
 
 private:
 
@@ -46,8 +56,13 @@ private:
 	
 	TableStates m_tableStates = {TableStates::TheDeal};
 
-	bool m_buttonPressed = false;
+	Sprite m_backOfCard;
+	Sprite m_coveredCard;
 
+	bool m_buttonPressed = false;
+	bool m_dealFinished = false;
+
+	Text* m_text = new Text;
 	//The Deal
 	
 	//Check if blackjack.

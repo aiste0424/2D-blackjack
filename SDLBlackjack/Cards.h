@@ -33,28 +33,26 @@ public:
 		Ace
 	};
 
-	enum class CardMovementState
+	enum class CardState
 	{
 		NoMovement,
 		Moving,
 		Finished
 	};
 
-	void SetSuit(Suit& suit);
-	void SetRank(Rank& rank);
+	void SetSuit(Suit suit);
+	void SetRank(Rank rank);
 	void SetValue(int value);
 	void SetIsTaken(bool taken);
 	void SetImage(Sprite& sprite);
-	void SetHasCardMoved(bool hasCardMoved);
-	void SetCardMovementState(CardMovementState& state);
+	void SetCardState(CardState state);
 
 	const Suit& GetSuit() const;
 	const Rank& GetRank() const;
 	int GetValue();
 	bool GetIsTaken();
-	bool GetHasCardMoved();
 	const Sprite& GetImage() const;
-	CardMovementState GetCardMovementState();
+	const CardState& GetCardState() const;
 
 	virtual bool Update() override;
 	virtual bool Render() override;
@@ -63,7 +61,7 @@ private:
 
 	Suit m_suit = static_cast<Suit>(0);
 	Rank m_rank = static_cast<Rank>(0);
-	CardMovementState m_cardMovementState = { CardMovementState::NoMovement };
+	CardState m_cardState = { CardState::NoMovement };
 	int m_value = 0;
 	bool m_isTaken = false;
 	bool m_hasCardMoved = false; //checks if the card travelled to its destination

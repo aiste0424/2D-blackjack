@@ -1,11 +1,11 @@
 #include "Cards.h"
 
-void Cards::SetSuit(Suit& suit)
+void Cards::SetSuit(Suit suit)
 {
     m_suit = suit;
 }
 
-void Cards::SetRank(Rank& rank)
+void Cards::SetRank(Rank rank)
 {
     m_rank = rank;
 }
@@ -23,6 +23,11 @@ void Cards::SetIsTaken(bool taken)
 void Cards::SetImage(Sprite& sprite)
 {
     m_sprite = sprite;
+}
+
+void Cards::SetCardState(CardState state)
+{
+    m_cardState = state;
 }
 
 int Cards::GetValue()
@@ -50,15 +55,16 @@ const Sprite& Cards::GetImage() const
     return m_sprite;
 }
 
+const Cards::CardState& Cards::GetCardState() const
+{
+    return m_cardState;
+}
+
 bool Cards::Update()
 {
     return true;
 }
 
-void Cards::SetCardMovementState(CardMovementState& m_state)
-{
-
-}
 
 bool Cards::Render()
 {
