@@ -1,10 +1,6 @@
 #include "Vector2D.h"
 #include <math.h>
 
-//magnitude - the size/length of the vector
-//direction
-//scalar - a mere number without a direction
-
 Vector2D::Vector2D(int x, int y)
 {
 	this->x = x;

@@ -26,4 +26,3 @@ private:
 	Button m_yes, m_no;
 	ImageOpen m_imageOpen = {ImageOpen::MainMenu};
 };
-

@@ -97,6 +97,12 @@
       <Filter>Source Files\Mechanics</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Music.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,6 +162,12 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Music.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

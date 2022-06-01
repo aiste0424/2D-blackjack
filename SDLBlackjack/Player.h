@@ -1,37 +1,32 @@
 #pragma once
-#include "Score.h"
-#include "GameObject.h"
-#include "Vector2D.h"
 #include <vector>
+#include "Score.h"
 #include "Cards.h"
+#include "Vector2D.h"
+#include "GameObject.h"
+#include "Sound.h"
 
 class Player : public GameObject
 {
 public:
 
-	enum class Choice
-	{
-		No,
-		Yes
-	};
-
 	void Initialize();
-	void AddCard(const Cards& card);
-
-	Choice GetChoice();  
-	void ResetScore();
-
 	virtual bool Update() override;
 	virtual bool Render() override;
+	void Unload();
+
+	void AddCard(Cards& card); //adds a card to the vector of cards
+	bool GetIsReadyToMove();
+	Score* GetScore();
+	void Reset();
 
 private:
 
-	Choice m_choice;
-	Score* m_score = new Score;
 	std::vector<Cards> m_cards;
-	Vector2D m_finalDestination = { 321, 510 };
-	std::vector<Vector2D> m_cardPositions;
+	Score* m_score = new Score;
+	Vector2D m_finalDestination = { 320, 510 }; //the position of the first card (starts the vector container)
+	std::vector<Vector2D> m_cardPositions;//card positions on screen
 
-	bool m_isReadyToMove = false;
-	bool m_isCardInPlace = true;
+	bool m_isReadyToMove = true;
+	Sound m_deal;
 };

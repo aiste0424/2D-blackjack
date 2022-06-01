@@ -49,4 +49,3 @@ private:
 
 	SDL_Rect m_targetRect;
 };
-

@@ -2,6 +2,8 @@
 #include "GameState.h"
 #include "Sprite.h"
 #include "Table.h"
+#include "Button.h"
+#include "Sound.h"
 
 class PlayState : public GameState
 {
@@ -25,5 +27,9 @@ private:
 	Sprite m_backgroundImage;
 	Sprite m_deckImage1, m_deckImage2;
 	Table m_table;
-};
+	Sound m_win;
+	Sound m_lose;
 
+	bool m_hasWinPlayed = false;
+	bool m_hasLosePlayed = false;
+};

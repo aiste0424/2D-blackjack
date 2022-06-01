@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <assert.h>
+
 Deck::Deck()
 {
 	m_cardSprite.Load("Assets/Images/MainGame/DeckOfCardsPixel.png");
@@ -115,7 +116,7 @@ bool Deck::CardTaken()
 		SetRandomSuit();
 		SetRandomRank();
 	}
-	m_deck[m_randomSuit][m_randomRank].SetIsTaken(true);
+	m_deck[GetRandomSuit()][GetRandomRank()].SetIsTaken(true);
 	m_selectedCard = m_deck[m_randomSuit][m_randomRank];
 	if (m_counter == 52)
 	{

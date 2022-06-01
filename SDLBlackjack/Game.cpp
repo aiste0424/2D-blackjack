@@ -1,6 +1,8 @@
  #include "Game.h"
 #include "Screen.h"
 #include "Input.h"
+#include "Text.h"
+#include "Music.h"
 
 Game::Game(GameState* initialState)
 {
@@ -10,10 +12,10 @@ Game::Game(GameState* initialState)
 bool Game::Initialize(const std::string& windowTitle, int width, int height)
 {
 	Screen::Instance()->Initialize(windowTitle, width, height);
+	Text::Initialize();
+	Music::Initialize();
 
 	//Init music system
-	//Init Font system
-	//Init third-party libraries
 	return true;
 }
 
@@ -23,6 +25,7 @@ bool Game::Run()
 
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
+		Uint64 start = SDL_GetPerformanceCounter();
 		Screen::Instance()->Clear();
 		Input::Instance()->Update();
 		
@@ -54,6 +57,12 @@ bool Game::Run()
 			m_gameState->OnExit();
 			m_gameState = nullptr;
 		}
+
+		//capping the frame rate to 60 FPS approx
+		Uint64 end = SDL_GetPerformanceCounter();
+		float elapsedMS = (end - start) / static_cast<float>(SDL_GetPerformanceFrequency());
+		float delay = 16.666f - elapsedMS;
+		SDL_Delay(static_cast<Uint32>(floor(delay)));
 	}
 	return true;
 }
@@ -61,5 +70,6 @@ bool Game::Run()
 void Game::Shutdown()
 {
 	Screen::Instance()->Shutdown();
-	//Close down everything you initialized in init()
+	Text::Shutdown();
+	Music::Shutdown();
 }

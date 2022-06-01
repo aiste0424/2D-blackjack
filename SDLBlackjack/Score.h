@@ -11,6 +11,7 @@ public:
 	int GetScore();
 	void SetScore(int score);
 	void UpdateScore();
+	void ChangeAceValue();
 
 	void SetCardValue(int value);
 

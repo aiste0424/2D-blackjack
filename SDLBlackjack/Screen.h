@@ -27,4 +27,3 @@ private:
 	SDL_Renderer* m_renderer{ nullptr };
 	SDL_Rect* m_screenSize{ nullptr };
 };
-

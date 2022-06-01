@@ -1,6 +1,5 @@
 #pragma once
 #include "Vector2D.h"
-#include <SDL.h>
 
 class GameObject
 {
@@ -23,7 +22,6 @@ public:
 protected:
 
 	Vector2D m_position;
-	Vector2D m_dimension;
+	Vector2D m_dimension = { 0, 0 };
 	double m_angle = { 0.0 };
 };
-

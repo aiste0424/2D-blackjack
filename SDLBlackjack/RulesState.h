@@ -4,7 +4,6 @@
 #include "Sprite.h"
 #include "MainMenuState.h"
 
-
 class RulesState : public GameState
 {
 public:
@@ -33,4 +32,3 @@ private:
 	RulePages m_rulePages = {RulePages::Rules};
 	FacingDirection m_facingDirection = { FacingDirection::Right };
 };
-

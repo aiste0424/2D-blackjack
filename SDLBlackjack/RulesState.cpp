@@ -1,6 +1,6 @@
 #include "RulesState.h"
-#include <string>
 #include "Vector2D.h"
+
 bool RulesState::OnEnter()
 {
 	auto InitializingBackgroundImages = [](Sprite& sprite, const std::string& filename,
@@ -57,7 +57,6 @@ GameState* RulesState::Update()
 		m_arrowsButton.SetButtonRect();
 		m_arrowsButton.SetIsFlipped(false);
 	}
-
 	return this;
 }
 

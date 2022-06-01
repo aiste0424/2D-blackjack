@@ -5,7 +5,6 @@ Score::Score()
 {
 	m_score = 0;
 	m_cardValue = 0;
-	Text::Initialize();
 	m_text.Load("Assets/Fonts/PixelFont.ttf", 100);
 	m_text.SetDimension(m_dimension.x, m_dimension.y);
 	m_text.SetColor(255, 245, 109, 250);
@@ -33,6 +32,11 @@ void Score::UpdateScore()
 	{
 		m_text.SetText("Your score: " + std::to_string(m_score));
 	}
+}
+
+void Score::ChangeAceValue()
+{
+	m_score = m_score - 10;
 }
 
 int Score::GetScore()
